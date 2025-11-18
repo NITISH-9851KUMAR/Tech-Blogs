@@ -1,8 +1,6 @@
 package entities;
 
-import dao.SignupDetailsDao;
-
-public class SignupDetailsEn {
+public class User {
 
     private String user_name;
     private String email;
@@ -10,9 +8,9 @@ public class SignupDetailsEn {
     private String password;
     private String blog_date;
 
-    public SignupDetailsEn(){}
+    public User(){}
 
-    public SignupDetailsEn(String uName, String email, String gender, String pass,  String blog_date){
+    public User(String uName, String email, String gender, String pass, String blog_date){
         this.user_name= uName;
         this.email= email;
         this.gender= gender;
