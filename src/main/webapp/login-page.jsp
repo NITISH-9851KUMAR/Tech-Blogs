@@ -31,14 +31,18 @@
                     <div class="card-body">
                         <form method="post" action="login">
                             <div class="form-group">
-                                <label for="exampleInputUserName">User Name</label>
-                                <input name="email" placeholder="Enter User Name" type="text" required class="form-control" id="exampleInputUserName" aria-describedby="emailHelp">
+                                <label for="exampleInputUserName">Email Address</label>
+                                <input name="email" placeholder="Enter Email Address" type="text" required class="form-control" id="exampleInputUserName" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <input name="password" type="password" placeholder="Enter Password" required  class="form-control" id="exampleInputPassword1">
                             </div>
-                            <button type="submit" class="btn btn-primary align-items-center">Login</button>
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn btn-primary align-items-center">Login</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
