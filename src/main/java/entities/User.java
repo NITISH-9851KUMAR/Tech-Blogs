@@ -20,10 +20,6 @@ public class User {
 
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -59,4 +55,9 @@ public class User {
     public String getBlog_date() {
         return blog_date;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
 }
