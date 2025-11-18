@@ -54,8 +54,11 @@
                             <input type="password" placeholder="Enter Your Password" required name="password"
                                    class="form-control" id="exampleInputPassword1">
                         </div>
-                        <button type="submit" class="btn btn-primary text-center">Register</button>
-                        <button type="reset" class="btn btn-danger ml-2">Reset</button>
+
+                        <div class="container text-center">
+                            <button type="submit" class="btn btn-primary text-center">Register</button>
+                            <button type="reset" class="btn btn-danger ml-2">Reset</button>
+                        </div>
 
                     </form>
                 </div>
