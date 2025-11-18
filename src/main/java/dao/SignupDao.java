@@ -6,7 +6,7 @@ import helper.ConnectionProvider;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class SignupDetailsDao {
+public class SignupDao {
 
     private Connection con= ConnectionProvider.getConnection();
 
