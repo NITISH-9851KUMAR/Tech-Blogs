@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/login")
-public class login extends HttpServlet {
+public class login_servlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
@@ -20,7 +20,7 @@ public class login extends HttpServlet {
         String uName= request.getParameter("user_name");
         String password= request.getParameter("password");
 
-        
+
 
     }
 
