@@ -1,7 +1,7 @@
 package servlet;
 
 import dao.SignupDetailsDao;
-import entities.SignupDetailsEn;
+import entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 
 @MultipartConfig
 @WebServlet("/signup-servlet")
-public class SignUp extends HttpServlet{
+public class SignUp_Servlet extends HttpServlet{
 
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +27,7 @@ public class SignUp extends HttpServlet{
 
         // Get the Date value
         LocalDateTime dateTime= LocalDateTime.now();
-        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy hh-MM");
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy hh-mm");
         String dateNow= dateTime.format(formatter);
 
         // Get The value from register-page.jsp
@@ -37,12 +37,12 @@ public class SignUp extends HttpServlet{
         String password= request.getParameter("password");
 
         // Call Signup Details Entities class for set value of Signup Details
-        SignupDetailsEn sEn= new  SignupDetailsEn(uName, email, gender, password, dateNow);
+        User user= new User(uName, email, gender, password, dateNow);
 
         // call SignupDetailsDao for save data into database;
         SignupDetailsDao sDao= new SignupDetailsDao();
-        if(sDao.saveSignupData(sEn) == true){
-            out.println("Done");
+        if(sDao.saveSignupData(user) == true){
+//            out.println("Done");
         }else{
             out.println("Some Error Occurred");
         }
