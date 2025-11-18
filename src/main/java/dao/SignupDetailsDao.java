@@ -1,6 +1,6 @@
 package dao;
 
-import entities.SignupDetailsEn;
+import entities.User;
 import helper.ConnectionProvider;
 
 import java.sql.Connection;
@@ -12,18 +12,18 @@ public class SignupDetailsDao {
 
     // Method to insert user data into table
 
-    public boolean saveSignupData(SignupDetailsEn detailsEn) {
+    public boolean saveSignupData(User user) {
 
         boolean flag = false;
         try {
 
             String query = "INSERT INTO USER_Details(user_name, email, gender, password, reg_date) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setString(1, detailsEn.getUser_name());
-            pstm.setString(2, detailsEn.getEmail());
-            pstm.setString(3, detailsEn.getGender());
-            pstm.setString(4, detailsEn.getPassword());
-            pstm.setString(5, detailsEn.getBlog_date());
+            pstm.setString(1, user.getUser_name());
+            pstm.setString(2, user.getEmail());
+            pstm.setString(3, user.getGender());
+            pstm.setString(4, user.getPassword());
+            pstm.setString(5, user.getBlog_date());
 
             pstm.executeUpdate();
             flag = true;
