@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="entities.Message" %>
 <html>
 <head>
     <title>Login Page</title>
@@ -14,9 +15,9 @@
 <body>
 
 <%--include navbar--%>
-<%@include file="navbar.jsp"%>
+<%@include file="navbar.jsp" %>
 
-<main class="d-flex align-items-center primary-background" style="height: 80vh">
+<main class="d-flex align-items-center primary-background" style="height: 100vh">
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
@@ -28,15 +29,30 @@
                         <h3>Login here</h3>
                     </div>
 
+                    <!-- Java Code -->
+                    <%
+                        Message message = (Message) session.getAttribute("message");
+                        if (message != null) {
+                    %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= message.getMessage() %>
+                    </div>
+                    <%
+                            session.removeAttribute("message");
+                        }
+                    %>
+
                     <div class="card-body">
                         <form method="post" action="login">
                             <div class="form-group">
                                 <label for="exampleInputUserName">Email Address</label>
-                                <input name="email" placeholder="Enter Email Address" type="text" required class="form-control" id="exampleInputUserName" aria-describedby="emailHelp">
+                                <input name="email" placeholder="Enter Email Address" type="email" required
+                                       class="form-control" id="exampleInputUserName" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <input name="password" type="password" placeholder="Enter Password" required  class="form-control" id="exampleInputPassword1">
+                                <input name="password" type="password" placeholder="Enter Password" required
+                                       class="form-control" id="exampleInputPassword1">
                             </div>
 
                             <div class="container text-center">
