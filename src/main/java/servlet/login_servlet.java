@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.*;
+import entities.Message;
 import entities.User;
 
 import javax.servlet.ServletException;
@@ -25,20 +26,21 @@ public class login_servlet extends HttpServlet {
         String UPassword= request.getParameter("password");
 
         // call the login Dao
+        User user= new loginDao().getUserByUserNameAndPassword(uName, UPassword);
 
-        User user= new User();
-
-        user= new loginDao().getUserByUserNameAndPassword(uName, UPassword);
-
-        if(user==null){ // if login error
-            // means login error, it may userName or password could be wrong
-            System.out.println("Invalid Details");
+        if(user==null){
+            // login error, could be wrong email or password
+            Message message= new Message("Invalid Details! try with another email & Password");
+            // Set message in session object
+            HttpSession session= request.getSession();
+            session.setAttribute("message", message);
+            response.sendRedirect("login-page.jsp");
         }
         else{ // if login success
-            // declare a session object
+            // Create a session object
             HttpSession session= request.getSession();
             session.setAttribute("CurrentUser", user);
-            response.sendRedirect("profile.jsp"); // send it profile page
+            response.sendRedirect("profile.jsp"); // Redirect it profile page
         }
     }
 
