@@ -1,6 +1,6 @@
 package servlet;
 
-import dao.SignupDetailsDao;
+import dao.SignupDao;
 import entities.User;
 
 import javax.servlet.ServletException;
@@ -40,7 +40,7 @@ public class SignUp_Servlet extends HttpServlet{
         User user= new User(uName, email, gender, password, dateNow);
 
         // call SignupDetailsDao for save data into database;
-        SignupDetailsDao sDao= new SignupDetailsDao();
+        SignupDao sDao= new SignupDao();
         if(sDao.saveSignupData(user) == true){
 //            out.println("Done");
         }else{
