@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.servlet.http.HttpSession;
 
 @MultipartConfig
 @WebServlet("/signup-servlet")
@@ -41,10 +42,17 @@ public class SignUp_Servlet extends HttpServlet{
 
         // call SignupDetailsDao for save data into database;
         SignupDao sDao= new SignupDao();
-        if(sDao.saveSignupData(user) == true){
-//            out.println("Done");
-        }else{
-            out.println("Some Error Occurred");
+        if (sDao.saveSignupData(user)) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            out.println("Successfully Register"); // Set the Message
+
+            // set email and password value into session object
+            HttpSession session= request.getSession();
+            session.setAttribute("email", email);
+            session.setAttribute("pass", password);
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            out.println("Email already exists"); // Set the Message
         }
 
     }
