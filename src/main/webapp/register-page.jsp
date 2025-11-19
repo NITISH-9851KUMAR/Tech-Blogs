@@ -2,8 +2,6 @@
   Created by IntelliJ IDEA.
   User: nitis
   Date: 11-10-2025
-  Time: 16:50
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -32,27 +30,26 @@
 
                         <div class="form-group">
                             <label for="user_name">User Name</label>
-                            <input type="text" placeholder="Enter User Name" name="user_name" class="form-control"
-                                   id="user_name" required aria-describedby="emailHelp">
+                            <input type="text" placeholder="Enter User Name" name="user_name"
+                                   class="form-control" id="user_name" required>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" placeholder="Enter Email address" name="email" required
-                                   class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="email" placeholder="Enter Email address" name="email"
+                                   class="form-control" id="exampleInputEmail1" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="gender">Select Gender</label> <br>
-                            <input type="radio" required value="male" id="gender" name="gender"> Male
+                            <label>Select Gender</label> <br>
+                            <input type="radio" required value="male" name="gender"> Male
                             <input type="radio" required value="female" name="gender"> Female
-
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" placeholder="Enter Your Password" required name="password"
-                                   class="form-control" id="exampleInputPassword1">
+                            <input type="password" placeholder="Enter Your Password" required
+                                   name="password" class="form-control" id="exampleInputPassword1">
                         </div>
 
                         <div class="container text-center">
@@ -69,12 +66,12 @@
     </div>
 </main>
 
-<!-- Modern Way to write Script Code -->
+<!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     document.getElementById("form-part").addEventListener("submit", function (e) {
-        e.preventDefault();
+        e.preventDefault(); 
 
         let form = new FormData(this);
 
@@ -82,30 +79,34 @@
             method: "POST",
             body: form
         })
-            .then(response => response.text())
-
+            .then(response => {
+                // Check if servlet returned success or error status
+                if (!response.ok) {
+                    return response.text().then(msg => { throw new Error(msg); });
+                }
+                return response.text();
+            })
             .then(data => {
-                Swal.fire({ // Show sweet Alert on Success Data
-                    title: "Form Successfully Submitted",
+                // SUCCESS SweetAlert
+                Swal.fire({
+                    title: "Registration Successful",
                     text: data,
-                    icon: "success",
-                }).then(() => { // Send on login-page.jsp page on successfully register
-                    window.location.href = "login-page.jsp"; // Redirect to Login Page
+                    icon: "success"
+                }).then(() => {
+                    window.location.href = "login-page.jsp"; // Redirect to login page
                 });
-                console.log("Success", data);
-
             })
             .catch(error => {
+                // ERROR SweetAlert
                 Swal.fire({
                     icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!",
+                    title: "Registration Failed",
+                    text: error.message
                 });
-                console.error("Error", error);
-            })
+                console.error("Error:", error);
+            });
     });
 </script>
-
 
 </body>
 </html>
