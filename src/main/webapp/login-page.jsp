@@ -16,6 +16,10 @@
 
 <%--include navbar--%>
 <%@include file="navbar.jsp" %>
+<%
+    String user_email = (String) session.getAttribute("email");
+    String user_pass = (String) session.getAttribute("pass");
+%>
 
 <main class="d-flex align-items-center primary-background" style="height: 100vh">
     <div class="container">
@@ -47,13 +51,22 @@
                             <div class="form-group">
                                 <label for="exampleInputUserName">Email Address</label>
                                 <input name="email" placeholder="Enter Email Address" type="email" required
+
+                                       value="<%=(user_email!= null ? user_email : "")%>"
                                        class="form-control" id="exampleInputUserName" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <input name="password" type="password" placeholder="Enter Password" required
+                                       value="<%= (user_pass!=null ?user_pass : "") %>"
                                        class="form-control" id="exampleInputPassword1">
                             </div>
+
+                            <!-- If user refresh site -->
+                            <%
+                                session.removeAttribute("email");
+                                session.removeAttribute("pass");
+                            %>
 
                             <div class="container text-center">
                                 <button type="submit" class="btn btn-primary align-items-center">Login</button>
