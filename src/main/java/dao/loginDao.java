@@ -21,16 +21,17 @@ public class loginDao {
             pstm.setString(1, email);
             pstm.setString(2, password);
 
-            ResultSet RSet = pstm.executeQuery();
+            ResultSet rSet = pstm.executeQuery();
 
-            if (RSet.next()) {
+            if (rSet.next()) {
                 // get the value from database and Set to User Entities
                 user = new User();
-                user.setUser_name(RSet.getString("user_name"));
-                user.setEmail(RSet.getString("email"));
-                user.setGender(RSet.getString("gender"));
-                user.setPassword(RSet.getString("password"));
-                user.setBlog_date(RSet.getString("reg_date"));
+                user.setUser_name(rSet.getString("user_name"));
+                user.setEmail(rSet.getString("email"));
+                user.setGender(rSet.getString("gender"));
+                user.setPassword(rSet.getString("password"));
+                user.setBlog_date(rSet.getString("reg_date"));
+                user.setImage(rSet.getString("pic"));
             }
 
         } catch (Exception e) {
