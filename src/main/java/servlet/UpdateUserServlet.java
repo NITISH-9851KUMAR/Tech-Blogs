@@ -2,7 +2,7 @@ package servlet;
 
 import entities.Message;
 import entities.User;
-import dao.EditUserDetails;
+import dao.UpdateUserDetails;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -48,7 +48,7 @@ public class UpdateUserServlet extends HttpServlet{
         user.setPassword(password);
         user.setImage(imageName);
 
-        boolean flag= new EditUserDetails().updateDetails(user);
+        boolean flag= new UpdateUserDetails().updateDetails(user);
         if(flag){
             Message msg= new Message("Update Value Successfully");
 
