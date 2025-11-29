@@ -10,6 +10,9 @@
 <%@ include file="all_css_js.jsp" %>
 <%@ page import="entities.User" %>
 <%@ page isErrorPage="true" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="helper.ConnectionProvider" %>
+<%@ page import="entities.Message" %>
 
 <%
     User user = (User) session.getAttribute("CurrentUser");
@@ -27,6 +30,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
           crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </head>
 <body>
@@ -101,6 +106,19 @@
 </nav>
 <!-- Navbar End -->
 
+<!-- Java Code -->
+<%
+    Message message = (Message) session.getAttribute("message");
+    if (message != null) {
+%>
+<div class="alert alert-danger" role="alert">
+    <%= message.getMessage() %>
+</div>
+<%
+        session.removeAttribute("message");
+    }
+%>
+
 <!-- Modal Code -->
 <!-- Button trigger modal -->
 
@@ -116,30 +134,121 @@
             </div>
             <div class="modal-body">
                 <div class="container text-center">
-                    <img src="img/pics.jpg" alt="" style="height: 100px; width: 100px">
-                    <h5><%= user.getUser_name() %></h5>
+                    <img src="<%=request.getContextPath() %>/img/<%=user.getImage() %>"
+                         width="150" height="150"
+                         style="object-fit: cover; border-radius: 50%;">
 
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <th scope="row">Email Id</th>
-                            <td> <%= user.getEmail()%></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Registration Date</th>
-                            <td><%=user.getBlog_date()%></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Gender</th>
-                            <td><%=user.getGender()%></td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                    <h5><%= user.getUser_name()%>
+                    </h5>
+
+                    <!-- Table under the div -->
+                    <div id="profile-details">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <% // Get user id from the table directly
+                                    Connection connection = ConnectionProvider.getConnection();
+                                    Statement statement = connection.createStatement();
+                                    String email = user.getEmail();
+                                    String sql = String.format("SELECT id FROM user_details WHERE email= '%s'", email);
+                                    ResultSet rSet = statement.executeQuery(sql);
+                                    int user_id = 0;
+                                    if (rSet.next()) {
+                                        user_id = rSet.getInt("id");
+                                    }
+                                    user.setId(user_id);
+                                %>
+
+                                <th scope="row">ID</th>
+                                <td><%= user_id%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email Id</th>
+                                <td><%= user.getEmail()%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Registration Date</th>
+                                <td><%=user.getBlog_date()%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Gender</th>
+                                <td><%=user.getGender().toUpperCase()%>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Profile Edit Div -->
+                    <div id="profile-edit" style="display: none">
+                        <h4 class="mt-2 " style="color: red;">Please Edit Carefully</h4>
+                        <!-- Edit table Details -->
+                        <form action="edit-servlet" method="post" enctype="multipart/form-data">
+                            <!-- Write Code from There Now we will edit -->
+                            <!-- enctype tells the form it contains multi type data like text, email, password, image -->
+                            <input type="hidden" name="u_id" value="<%=user_id%>">
+
+                            <table class="table">
+
+                                <th scope="row">ID</th>
+                                <td><%= user_id %>
+                                </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Name</th>
+                                    <td><input class="form-control" type="text" name="u_name"
+                                               value="<%= user.getUser_name()%>">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Email Id</th>
+                                    <td><input class="form-control" type="email" name="u_email"
+                                               value="<%= user.getEmail()%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Registration Date</th> <!-- Non editable -->
+                                    <td><%=user.getBlog_date()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Gender</th>
+                                    <td><input class="form-control" type="text" name="u_gender"
+                                               value="<%=user.getGender().toUpperCase()%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Password</th>
+                                    <td><input class="form-control" type="password" name="u_password"
+                                               value="<%=user.getPassword()%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Profile Pic</th>
+                                    <td><input class="form-control" type="file" name="u_pic"></td>
+                                </tr>
+                            </table>
+
+                            <!-- Submit Button -->
+                            <div class="container">
+                                <button type="submit" class="btn btn-outline-primary">Save</button>
+                            </div>
+
+                        </form>
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Edit Profile</button>
+                <button id="edit-profile-button" type="button" class="btn btn-primary">Edit Profile</button>
             </div>
         </div>
     </div>
@@ -154,6 +263,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let editStatus = false;
+        $('#edit-profile-button').click(function () {
+            if (editStatus == false) {
+                $("#profile-details").hide();
+                $("#profile-edit").show();
+                editStatus = true;
+                $(this).text("Back");
+            } else {
+                $("#profile-details").show();
+                $("#profile-edit").hide();
+                editStatus = false;
+                $(this).text("Edit");
+            }
+
+        });
+
+    });
+</script>
 
 </body>
 </html>
