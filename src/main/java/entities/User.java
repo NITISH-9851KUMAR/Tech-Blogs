@@ -1,27 +1,29 @@
 package entities;
 
 public class User {
-
+    private int id;
     private String user_name;
     private String email;
     private String gender;
     private String password;
     private String blog_date;
+    private String image;
+
 
     public User(){}
 
-    public User(String uName, String email, String gender, String pass, String blog_date){
+    public User(String uName, String email, String gender, String pass, String blog_date, String image){
         this.user_name= uName;
         this.email= email;
         this.gender= gender;
         this.blog_date= blog_date;
         this.password= pass;
+        this.image= image;
         // Call the SignupDetailsDao class for store data into database;
-
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(int id){
+        this.id= id;
     }
 
     public void setUser_name(String user_name) {
@@ -38,6 +40,18 @@ public class User {
 
     public void setBlog_date(String blog_date) {
         this.blog_date = blog_date;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setImage(String image){
+        this.image= image;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public String getUser_name() {
@@ -58,6 +72,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getImage(){
+        return this.image;
     }
 
 }
