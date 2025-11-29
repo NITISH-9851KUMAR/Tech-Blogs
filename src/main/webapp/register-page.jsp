@@ -52,6 +52,12 @@
                                    name="password" class="form-control" id="exampleInputPassword1">
                         </div>
 
+                        <div class="form-group">
+                            <label for="exampleInputImage">Profile Photo</label>
+                            <input type="file" placeholder="Upload Image" required
+                                   name="photo" class="form-control" id="exampleInputImage">
+                        </div>
+
                         <div class="container text-center">
                             <button type="submit" class="btn btn-primary text-center">Register</button>
                             <button type="reset" class="btn btn-danger ml-2">Reset</button>
