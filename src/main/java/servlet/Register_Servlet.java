@@ -6,18 +6,16 @@ import entities.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.servlet.http.HttpSession;
+import java.io.File;
 
 @MultipartConfig
 @WebServlet("/signup-servlet")
-public class SignUp_Servlet extends HttpServlet{
+public class Register_Servlet extends HttpServlet{
 
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,8 +35,23 @@ public class SignUp_Servlet extends HttpServlet{
         String gender= request.getParameter("gender");
         String password= request.getParameter("password");
 
+        // Getting the image information form the client
+        Part photoPart= request.getPart("photo");
+        // Read photo name as String
+        String photoName= photoPart.getSubmittedFileName();
+        // Save Photo into the local Folder
+        String uploadPath= getServletContext().getRealPath("/img");
+        // It Treats as file
+        File uploadDir= new File(uploadPath);
+        if(!uploadDir.exists()){ // if uploadDir doesn't exist then create this, but in this case it exists
+            uploadDir.mkdirs();
+        }
+
+        photoPart.write(uploadPath+File.separator+photoName);
+        // It Save photo into the local folder
+
         // Call Signup Details Entities class for set value of Signup Details
-        User user= new User(uName, email, gender, password, dateNow);
+        User user= new User(uName, email, gender, password, dateNow , photoName);
 
         // call SignupDetailsDao for save data into database;
         SignupDao sDao= new SignupDao();
