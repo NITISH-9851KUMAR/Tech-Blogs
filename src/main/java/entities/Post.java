@@ -1,70 +1,88 @@
 package entities;
 
-import java.sql.Timestamp;
-
 public class Post {
-    private int id;
+    private int pId;
     private String pTitle;
     private String pContent;
+    private String pCode;
     private String pPic;
-    private Timestamp pDate;
-    private int catId;
+    private String pDate;
+    private int catId; // Post Category id
+    private int userId;
 
-    public Post() {}
-
-    public Post(int id, String pTitle, String pContent, String pPic, Timestamp pDate, int catId) {
-        this.id = id;
+    public Post(String pTitle, String pContent, String pCode, String pPic, int catId, int userId) {
         this.pTitle = pTitle;
         this.pContent = pContent;
+        this.pCode = pCode;
+        this.pPic = pPic;
+        this.catId = catId;
+        this.userId= userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Post(int pId, String pTitle, String pContent, String pCode, String pPic, String pDate, int catId, int userId) {
+        this.pId = pId;
+        this.pTitle = pTitle;
+        this.pContent = pContent;
+        this.pCode = pCode;
         this.pPic = pPic;
         this.pDate = pDate;
         this.catId = catId;
-    }
-    public Post(String pTitle, String pContent, String pPic, Timestamp pDate, int catId) {
-        this.pTitle = pTitle;
-        this.pContent = pContent;
-        this.pPic = pPic;
-        this.pDate = pDate;
-        this.catId = catId;
+        this.userId= userId;
     }
 
-    public int getId() {
-        return id;
+    public int getpId() {
+        return pId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setpId(int pId) {
+        this.pId = pId;
     }
 
-    public String getTitle() {
+    public String getpTitle() {
         return pTitle;
     }
 
-    public void setTitle(String pTitle) {
+    public void setpTitle(String pTitle) {
         this.pTitle = pTitle;
     }
 
-    public String getContent() {
+    public String getpContent() {
         return pContent;
     }
 
-    public void setContent(String pContent) {
+    public void setpContent(String pContent) {
         this.pContent = pContent;
     }
 
-    public String getPic() {
+    public String getpCode() {
+        return pCode;
+    }
+
+    public void setpCode(String pCode) {
+        this.pCode = pCode;
+    }
+
+    public String getpPic() {
         return pPic;
     }
 
-    public void setPic(String pPic) {
+    public void setpPic(String pPic) {
         this.pPic = pPic;
     }
 
-    public Timestamp getDate() {
+    public String getpDate() {
         return pDate;
     }
 
-    public void setDate(Timestamp pDate) {
+    public void setpDate(String pDate) {
         this.pDate = pDate;
     }
 

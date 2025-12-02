@@ -29,9 +29,27 @@
             <li class="nav-item">
                 <a class="nav-link Enable" href="#"> <span class="fa fa-address-book"></span> Contact Us</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
                 <a href="#" class="btn text-white" data-toggle="modal"
                    data-target="#add-post"><span class="fa fa-paper-plane" ></span> Do Post</a>
+            </li>
+
+            <!-- PUSH NEXT ITEMS TO RIGHT -->
+            <li class="ml-auto"></li>
+
+            <li class="nav-item ml-3">
+                <% // Java Code Fetching User Name
+                    User user1 = (User) session.getAttribute("CurrentUser");
+                    String name = user1.getUser_name();
+                %>
+                <a href="#" class="btn text-white form-control ml-3" data-toggle="modal"
+                   data-target="#profile-model"><span class="fa fa-user"></span> <%=name%>
+                </a>
+            </li>
+
+            <li class="nav-item ml-3">
+                <a href="logout-servlet" class="btn text-white form-control my-2 my-sm-0">
+                <span class="fa fa-sign-out"></span> Logout</a>
             </li>
 
         </ul>

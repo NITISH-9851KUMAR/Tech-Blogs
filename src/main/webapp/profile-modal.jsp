@@ -152,18 +152,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="doPostServlet" method="post" enctype="multipart/form-data"> <!-- do post form -->
+            <form id="add-post-form" action="doPostServlet" method="post" enctype="multipart/form-data"> <!-- do post form -->
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <select required class="form-control" name="postCategories">
+                        <select required class="form-control" name="cid">
                             <option selected disabled>---Select Categories--</option>
                             <%
                                 CategoryDao categoryDao = new CategoryDao();
                                 ArrayList<Category> list = categoryDao.getAllCategories();
                                 for (Category category : list) {
                             %>
-                            <option><%= category.getName()%>
+                            <option value="<%=category.getId()%>" ><%= category.getName()%>
                             </option>
                             <%
                                 }
@@ -202,3 +202,7 @@
 </div>
 
 <%-- Do Post Modal End--%>
+
+<script> <!-- Javascript file for add Post -->
+
+</script>
