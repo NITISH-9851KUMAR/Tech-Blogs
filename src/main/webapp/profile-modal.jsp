@@ -203,6 +203,48 @@
 
 <%-- Do Post Modal End--%>
 
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script> <!-- Javascript file for add Post -->
 
+document.getElementById("add-post-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let form = new FormData(this); // It collects all form data
+
+    fetch("doPostServlet", { // fetch method send data to the servlet url like "doPostServlet"
+        method: "POST",
+        body: form // It sends all form data to the doPostServlet
+    })
+        .then(response => { // if servlet send error message then it will execute
+            // Check if servlet returned success or error status
+            if (!response.ok) {
+                return response.text().then(msg => {
+                    throw new Error(msg);
+                });
+            }
+            return response.text();
+        })
+        .then(data => {
+            // SUCCESS SweetAlert
+            Swal.fire({
+                title: "Post Done Successfully",
+                text: data,
+                icon: "success"
+            })
+            //     .then(() => {
+            //     window.location.href = "login-page.jsp"; // Redirect to login page
+            // });
+        })
+        .catch(error => {
+            // ERROR SweetAlert
+            Swal.fire({
+                icon: "error",
+                title: "Registration Failed",
+                text: "Something went wrong. Please try again!"
+            });
+            console.error("Error:", error);
+        });
+});
 </script>
