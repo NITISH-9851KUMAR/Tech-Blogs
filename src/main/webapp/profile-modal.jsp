@@ -27,7 +27,7 @@
                     </h5>
 
                     <!-- Table under the div -->
-                    <div id="profile-details">
+                    <div id="profile-details"> <!-- It will execute when we click on userName in profile page -->
                         <table class="table">
                             <tbody>
                             <tr>

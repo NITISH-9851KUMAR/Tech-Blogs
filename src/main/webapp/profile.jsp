@@ -13,6 +13,10 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="helper.ConnectionProvider" %>
 <%@ page import="entities.Message" %>
+<%@ page import="dao.CategoryDao" %>
+<%@ page import="dao.PostDao" %>
+<%@ page import="entities.Post" %>
+<%@ page import="java.util.List" %>
 
 <%
     User user = (User) session.getAttribute("CurrentUser");
@@ -52,6 +56,46 @@
         session.removeAttribute("message");
     }
 %>
+
+<main>
+
+    <div class="container">
+        <div class="row mt-4">
+            <%--                First Column--%>
+            <div class="col-md-4">
+                <%--                    categores--%>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                        All Post Category
+                    </a>
+                    <%
+                        CategoryDao cDao = new CategoryDao();
+                        ArrayList<Category> l = cDao.getAllCategories();
+                        for (Category c : l) { %>
+                    <a href="#" class="list-group-item list-group-item-action"><%=c.getName()%>
+                    </a>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+
+            <%-- Second Column--%>
+            <div class="col-md-8">
+                <%-- Show All Post--%>
+                <%
+                    PostDao pDao = new PostDao();
+                    ArrayList<Post> pList= pDao.allPost();
+                    for (Post p : pList) { %>
+                    <h5><%=p.getpContent()%></h5>
+                <%
+                    }
+                %>
+            </div>
+        </div>
+    </div>
+
+</main>
 
 
 
