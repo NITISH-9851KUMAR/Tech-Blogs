@@ -2,6 +2,7 @@
 <%@ page import="entities.Post" %>
 <%@ page import="entities.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="dao.LikeDao" %>
 
 <div class="row">
     <%
@@ -36,8 +37,10 @@
             </div>
             <div class="card-footer bg-primary text-center">
                 <a href="post_details.jsp?post_id=<%=allPost.getpId()%>" class="btn btn-outline-light  btn-sm">Read More...</a>
-                <a href="#!" class= "btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span> 10</span></a>
-                <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span> 20</span></a>
+                <!-- Like Button -->
+                <a href="#" onclick="doLike(<%=allPost.getpId()%>, <%=user.getUserId()%>)"
+                   class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span class="like-counter"> <%=LikeDao.countLikeOnPost(allPost.getpId())%></span></a>
+                <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span> 20</span></a>
             </div>
         </div>
     </div>
@@ -45,3 +48,5 @@
         }
     %>
 </div>
+
+<script src="js/doLike.js"></script>

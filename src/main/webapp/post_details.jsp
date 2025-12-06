@@ -3,13 +3,12 @@
 
 <%@ page import="entities.User" %>
 <%@ page import="entities.Post" %>
-<%@ page import="java.util.List" %>
 <%@ page import="dao.PostDao" %>
 <%@ page import="dao.CategoryDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entities.Category" %>
-<%@ page import="java.util.Locale" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="dao.LikeDao" %>
 <%@include file="all_css_js.jsp" %>
 <%
     User user = (User) session.getAttribute("CurrentUser");
@@ -31,6 +30,7 @@
             background-attachment: fixed;
         }
     </style>
+
 </head>
 <body>
 <!-- Navbar code -->
@@ -108,11 +108,7 @@
                 <div class="card-body">
                     <img class="card-img-top" src="img/<%=post.getpPic()%>" alt="">
                     <div class=" my-3 container row">
-                        <%
-                            SimpleDateFormat sdf = new SimpleDateFormat("mmm-DD-yyyy");
-                            String formattedDate = sdf.format(post.getpDate());
-                        %>
-                        <div><%=formattedDate%>
+                        <div><%=post.getpDate()%>
                         </div>
                     </div>
                     <p><%=post.getpContent()%>
@@ -121,8 +117,11 @@
                 </div>
 
                 <div class="card-footer primary-background">
-                    <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span> 10</span></a>
-                    <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span> 20</span></a>
+                    <!-- Like Button -->
+                    <a href="#" onclick="doLike(<%=post.getpId()%>, <%=user.getUserId()%>)"
+                       class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span class="like-counter"> <%=LikeDao.countLikeOnPost(post.getpId())%></span></a>
+                    <!-- Comment Button -->
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span> 20</span></a>
                 </div>
             </div>
         </div>
@@ -313,6 +312,9 @@
 <%-- Do Post Modal End--%>
 
 <!-- Java Script File -->
+<!-- Add doLike js file It is used in line number 119 -->
+<script src="js/doLike.js">
+</script>
 <script> <!-- Javascript file for add Post -->
 document.getElementById("add-post-form").addEventListener("submit", function (e) {
     e.preventDefault();
