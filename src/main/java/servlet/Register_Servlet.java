@@ -1,6 +1,6 @@
 package servlet;
 
-import dao.SignupDao;
+import dao.UserDao;
 import entities.User;
 
 import javax.servlet.ServletException;
@@ -41,21 +41,15 @@ public class Register_Servlet extends HttpServlet{
         String photoName= photoPart.getSubmittedFileName();
         // Save Photo into the local Folder
         String uploadPath= getServletContext().getRealPath("/img");
-        // It Treats as file
-        File uploadDir= new File(uploadPath);
-        if(!uploadDir.exists()){ // if uploadDir doesn't exist then create this, but in this case it exists
-            uploadDir.mkdirs();
-        }
-
         photoPart.write(uploadPath+File.separator+photoName);
         // It Save photo into the local folder
 
         // Call Signup Details Entities class for set value of Signup Details
         User user= new User(uName, email, gender, password, dateNow , photoName);
 
-        // call SignupDetailsDao for save data into database;
-        SignupDao sDao= new SignupDao();
-        if (sDao.saveSignupData(user)) {
+        // call UserDao for save data into database;
+        UserDao userDao= new UserDao();
+        if (userDao.saveUserData(user)) {
             response.setStatus(HttpServletResponse.SC_OK);
             out.println("Successfully Register"); // Set the Message
 

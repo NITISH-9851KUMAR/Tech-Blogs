@@ -26,6 +26,7 @@ public class loginDao {
             if (rSet.next()) {
                 // get the value from database and Set to User Entities
                 user = new User();
+                user.setUserId(rSet.getInt("id"));
                 user.setUser_name(rSet.getString("user_name"));
                 user.setEmail(rSet.getString("email"));
                 user.setGender(rSet.getString("gender"));

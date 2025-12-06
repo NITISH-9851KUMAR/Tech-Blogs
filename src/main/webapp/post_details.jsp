@@ -1,12 +1,134 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="error-page.jsp" %>
+
+<%@ page import="entities.User" %>
+<%@ page import="entities.Post" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.PostDao" %>
 <%@ page import="dao.CategoryDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entities.Category" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@include file="all_css_js.jsp" %>
+<%
+    User user = (User) session.getAttribute("CurrentUser");
+    if (user == null) {
+        response.sendRedirect("login-page.jsp");
+        return;
+    }
+    int pId = Integer.parseInt(request.getParameter("post_id"));
+    Post post = PostDao.allPostByPostId(pId);
+%>
+<html>
+<head>
+    <title><%=post.getpTitle()%>
+    </title>
+    <style>
+        body{
+            background: url("img/images.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar code -->
+<nav class="navbar navbar-expand-lg navbar-dark primary-background">
+    <a class="navbar-brand" href="index.jsp"> <span class="  fa fa-snowflake-o"></span>TechBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" Id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="profile.jsp"> <span class="fa fa-star"></span> Home <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"> <span class="fa fa-universal-access"></span> Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" Id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-bomb"></span> Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">C Programming</a>
+                    <a class="dropdown-item" href="#">Java Programming</a>
+                    <a class="dropdown-item" href="#">Python Programming</a>
 
-<!-- It is Navbar of profile.jsp File -->
-<%@include file="profile-navbar.jsp"%>
-<!-- Terminated Navbar of profile.jsp File -->
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link Enable" href="#"> <span class="fa fa-address-book"></span> Contact Us</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a href="#" class="btn text-white" data-toggle="modal"
+                   data-target="#add-post"><span class="fa fa-paper-plane"></span> Do Post</a>
+            </li>
 
+            <!-- PUSH NEXT ITEMS TO RIGHT -->
+            <li class="ml-auto"></li>
+
+            <li class="nav-item ml-3">
+                <% // Java Code Fetching User Name
+                    User user1 = (User) session.getAttribute("CurrentUser");
+                    String name = user1.getUser_name();
+                %>
+                <a href="#" class="btn text-white form-control ml-3" data-toggle="modal"
+                   data-target="#profile-model"><span class="fa fa-user"></span> <%=name%>
+                </a>
+            </li>
+
+            <li class="nav-item ml-3">
+                <a href="logout-servlet" class="btn text-white form-control my-2 my-sm-0">
+                    <span class="fa fa-sign-out"></span> Logout</a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
+
+<%--    Show post Details--%>
+<div class="container">
+    <div class="row my-2">
+        <div class="col-md-6 offset-md-4">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h4><%=post.getpTitle()%>
+                    </h4>
+                </div>
+
+                <div class="card-body">
+                    <img class="card-img-top" src="img/<%=post.getpPic()%>" alt="">
+                    <div class=" my-3 container row">
+                        <%
+                            SimpleDateFormat sdf = new SimpleDateFormat("mmm-DD-yyyy");
+                            String formattedDate = sdf.format(post.getpDate());
+                        %>
+                        <div><%=formattedDate%>
+                        </div>
+                    </div>
+                    <p><%=post.getpContent()%>
+                    </p>
+                    <pre><%=post.getpCode()%></pre>
+                </div>
+
+                <div class="card-footer primary-background">
+                    <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span> 10</span></a>
+                    <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span> 20</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 <!-- Profile-View Model Start-->
 <div class="modal fade" Id="profile-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -57,7 +179,7 @@
                     </div>
 
                     <!-- Profile Edit Div -->
-                    <div    Id="profile-edit" style="display: none">
+                    <div Id="profile-edit" style="display: none">
                         <h4 class="mt-2 " style="color: red;">Please Edit Carefully</h4>
                         <!-- Edit table Details -->
                         <form action="edit-servlet" method="post" enctype="multipart/form-data">
@@ -125,7 +247,6 @@
         </div>
     </div>
 </div>
-
 <!-- Profile-View Model End -->
 
 <!-- Do Post Modal Code Starts -->
@@ -140,7 +261,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form Id="add-post-form" action="doPostServlet" method="post" enctype="multipart/form-data"> <!-- do post form -->
+            <form Id="add-post-form" action="doPostServlet" method="post" enctype="multipart/form-data">
+                <!-- do post form -->
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -151,7 +273,7 @@
                                 ArrayList<Category> list = categoryDao.getAllCategories();
                                 for (Category category : list) {
                             %>
-                            <option value="<%=category.getId()%>" ><%= category.getName()%>
+                            <option value="<%=category.getId()%>"><%= category.getName()%>
                             </option>
                             <%
                                 }
@@ -167,12 +289,12 @@
                     <div class="form-group">
                         <label for="post-content">Post Content</label>
                         <textarea name="postContent" class="form-control" Id="post-content"
-                               required placeholder="Enter Post Content"></textarea>
+                                  required placeholder="Enter Post Content"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="post-code">Post Code</label>
                         <textarea name="postCode" class="form-control" Id="post-code"
-                                required placeholder="Enter Post Code( if any )"></textarea>
+                                  required placeholder="Enter Post Code( if any )"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="post-pic">Post Pic</label>
@@ -188,13 +310,9 @@
         </div>
     </div>
 </div>
-
 <%-- Do Post Modal End--%>
 
-<!-- SweetAlert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+<!-- Java Script File -->
 <script> <!-- Javascript file for add Post -->
 document.getElementById("add-post-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -229,10 +347,11 @@ document.getElementById("add-post-form").addEventListener("submit", function (e)
             // ERROR SweetAlert
             Swal.fire({
                 icon: "error",
-                title: "Registration Failed",
+                title: "Post Failed",
                 text: "Something went wrong. Please try again!"
             });
             console.error("Error:", error);
         });
 });
 </script>
+</html>

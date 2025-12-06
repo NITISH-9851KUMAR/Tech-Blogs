@@ -33,7 +33,7 @@ public class DoPostServlet extends HttpServlet {
         HttpSession session= request.getSession();
         User user= (User) session.getAttribute("CurrentUser");
 
-        Post post= new Post(postTitle, postContent, postCode, picName, catId, user.getId());
+        Post post= new Post(postTitle, postContent, postCode, picName, catId, user.getUserId());
 
         if(PostDao.savePost(post)){
             // Also we can write this program outside of if block, it is good thing to write inside this block

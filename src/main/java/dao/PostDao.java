@@ -2,12 +2,12 @@ package dao;
 
 import entities.Post;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PostDao {
 
@@ -38,16 +38,16 @@ public class PostDao {
     }
 
     // Return All Post by UserId
-    public ArrayList<Post> allPost( ){
+    public ArrayList<Post> allPost(int id){
         ArrayList<Post> list= new ArrayList<>();
 
         try{
             Connection connection= helper.ConnectionProvider.getConnection();
-            String sql= "SELECT * FROM posts WHERE userId = ?";
+            String sql= "SELECT * FROM posts WHERE userId= ? ORDER BY pid DESC";
             PreparedStatement pstm= connection.prepareStatement(sql);
-            pstm.setInt(1, 1);
+            pstm.setInt(1, id);
 
-            ResultSet rSet= pstm.executeQuery(sql);
+            ResultSet rSet= pstm.executeQuery();
             while (rSet.next()) {
                 int pId= rSet.getInt("pId");
                 String pTitle= rSet.getString("pTitle");
@@ -69,15 +69,18 @@ public class PostDao {
         return list;
     }
 
-    // Get All Post By CatId
-    public ArrayList<Post> allPostByCatId(){
+    // Get All Post By CatId and UserId
+    public ArrayList<Post> allPostByCatId(int cId, int uId){
         ArrayList<Post> list= new ArrayList<>();
 
         try{
             Connection connection= helper.ConnectionProvider.getConnection();
-            Statement statement= connection.createStatement();
-            String sql= "SELECT * FROM posts";
-            ResultSet rSet= statement.executeQuery(sql);
+            String sql= "SELECT * FROM posts WHERE catId=? AND userId= ? ";
+            PreparedStatement pstm= connection.prepareStatement(sql);
+            pstm.setInt(1, cId);
+            pstm.setInt(2, uId);
+
+            ResultSet rSet= pstm.executeQuery();
             while (rSet.next()) {
                 int pId= rSet.getInt("pId");
                 String pTitle= rSet.getString("pTitle");
@@ -99,4 +102,35 @@ public class PostDao {
         return list;
     }
 
+    // Get all Post Details by postId
+
+    public static Post allPostByPostId(int post_Id){
+        Post post= null;
+
+        try{
+            Connection connection= helper.ConnectionProvider.getConnection();
+            String sql= "SELECT * FROM posts WHERE pid=?";
+            PreparedStatement pstm= connection.prepareStatement(sql);
+            pstm.setInt(1, post_Id);
+
+            ResultSet rSet= pstm.executeQuery();
+            while (rSet.next()) {
+                int pId= rSet.getInt("pId");
+                String pTitle= rSet.getString("pTitle");
+                String pContent= rSet.getString("pContent");
+                String pCode= rSet.getString("pCode");
+                String pPic= rSet.getString("pPic");
+                String pDate= rSet.getString("pDate");
+                int catId= rSet.getInt("catId");
+                int userId= rSet.getInt("userId");
+
+                post= new Post(pId, pTitle, pContent, pCode, pPic, pDate, catId, userId);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return post;
+    }
 }

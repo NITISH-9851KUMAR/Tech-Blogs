@@ -13,9 +13,8 @@
     <%@include file="all_css_js.jsp"%>
 </head>
 <body>
-
 <div class=" container text-center mt-3" style="width: 400px; height: 400px;">
-    <img src="img/Error-Image.png" class="img-fluid" >
+    <img src="img/error-img.png" class="img-fluid" >
 </div>
 
 <div class="container text-center" >
@@ -23,7 +22,5 @@
     <%= exception %> <br>
    <a href="index.jsp" class="btn primary-background btn-lg mt-2 text-white">Home Page</a>
 </div>
-
-
 </body>
 </html>

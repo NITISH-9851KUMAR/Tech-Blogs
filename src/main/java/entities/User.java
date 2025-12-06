@@ -1,7 +1,7 @@
 package entities;
 
 public class User {
-    private int id;
+    private int userId;
     private String user_name;
     private String email;
     private String gender;
@@ -22,8 +22,8 @@ public class User {
         // Call the SignupDetailsDao class for store data into database;
     }
 
-    public void setId(int id){
-        this.id= id;
+    public void setUserId(int userId){
+        this.userId = userId;
     }
 
     public void setUser_name(String user_name) {
@@ -50,8 +50,8 @@ public class User {
         this.image= image;
     }
 
-    public int getId(){
-        return this.id;
+    public int getUserId(){
+        return this.userId;
     }
 
     public String getUser_name() {

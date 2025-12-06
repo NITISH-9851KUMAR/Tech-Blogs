@@ -20,7 +20,6 @@ public class login_servlet extends HttpServlet {
         throws IOException, ServletException {
 
         response.setContentType("text/html");
-        PrintWriter out= response.getWriter();
 
         String uName= request.getParameter("email");
         String UPassword= request.getParameter("password");

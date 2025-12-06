@@ -51,15 +51,14 @@
                             <div class="form-group">
                                 <label for="exampleInputUserName">Email Address</label>
                                 <input name="email" placeholder="Enter Email Address" type="email" required
-
                                        value="<%=(user_email!= null ? user_email : "")%>"
-                                       class="form-control" id="exampleInputUserName" aria-describedby="emailHelp">
+                                       class="form-control" Id="exampleInputUserName" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <input name="password" type="password" placeholder="Enter Password" required
                                        value="<%= (user_pass!=null ?user_pass : "") %>"
-                                       class="form-control" id="exampleInputPassword1">
+                                       class="form-control" Id="exampleInputPassword1">
                             </div>
 
                             <!-- If user refresh site -->

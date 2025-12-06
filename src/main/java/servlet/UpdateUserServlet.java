@@ -1,8 +1,8 @@
 package servlet;
 
+import dao.UserDao;
 import entities.Message;
 import entities.User;
-import dao.UpdateUserDetails;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -41,14 +41,14 @@ public class UpdateUserServlet extends HttpServlet{
         String oldPicName= user.getImage();
 
         // Set the value
-        user.setId(userId);
+        user.setUserId(userId);
         user.setUser_name(name);
         user.setEmail(email);
         user.setGender(gender);
         user.setPassword(password);
         user.setImage(imageName);
 
-        boolean flag= new UpdateUserDetails().updateDetails(user);
+        boolean flag= new UserDao().updateUserDetails(user);
         if(flag){
             Message msg= new Message("Update Value Successfully");
 

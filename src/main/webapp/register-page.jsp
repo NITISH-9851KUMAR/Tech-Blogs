@@ -26,18 +26,18 @@
 
                 <div class="card-body">
 
-                    <form id="form-part" method="post" action="signup-servlet">
+                    <form Id="form-part" method="post" action="signup-servlet" enctype="multipart/form-data">
 
                         <div class="form-group">
                             <label for="user_name">User Name</label>
                             <input type="text" placeholder="Enter User Name" name="user_name"
-                                   class="form-control" id="user_name" required>
+                                   class="form-control" Id="user_name" required>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" placeholder="Enter Email address" name="email"
-                                   class="form-control" id="exampleInputEmail1" required>
+                                   class="form-control" Id="exampleInputEmail1" required>
                         </div>
 
                         <div class="form-group">
@@ -49,13 +49,13 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" placeholder="Enter Your Password" required
-                                   name="password" class="form-control" id="exampleInputPassword1">
+                                   name="password" class="form-control" Id="exampleInputPassword1">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputImage">Profile Photo</label>
                             <input type="file" placeholder="Upload Image" required
-                                   name="photo" class="form-control" id="exampleInputImage">
+                                   name="photo" class="form-control" Id="exampleInputImage">
                         </div>
 
                         <div class="container text-center">

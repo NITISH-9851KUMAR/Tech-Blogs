@@ -29,14 +29,14 @@
 <html>
 <head>
     <title>Profile Page</title>
-
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-          crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
+    <%@include file="all_css_js.jsp" %>
+    <style>
+        body{
+            background: url("img/img.png");
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
 
@@ -65,14 +65,16 @@
             <div class="col-md-4">
                 <%--                    categores--%>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    <a href="#" onClick="getAllPost(0, this)" class="c-link list-group-item list-group-item-action active" aria-current="true">
                         All Post Category
                     </a>
                     <%
                         CategoryDao cDao = new CategoryDao();
                         ArrayList<Category> l = cDao.getAllCategories();
-                        for (Category c : l) { %>
-                    <a href="#" class="list-group-item list-group-item-action"><%=c.getName()%>
+                        for (Category category : l) {
+                    %>
+                    <a href="#" onClick="getAllPost(<%=category.getId()%>, this)"
+                       class="c-link list-group-item list-group-item-action"><%=category.getName()%>
                     </a>
                     <%
                         }
@@ -83,14 +85,15 @@
             <%-- Second Column--%>
             <div class="col-md-8">
                 <%-- Show All Post--%>
-                <%
-                    PostDao pDao = new PostDao();
-                    ArrayList<Post> pList= pDao.allPost();
-                    for (Post p : pList) { %>
-                    <h5><%=p.getpContent()%></h5>
-                <%
-                    }
-                %>
+                    <div class="container text-center" id="loader">
+                        <i class="fa fa-refresh fa-2x fa-spin"></i>
+                        <h3 class="mt-2">Loading...</h3>
+                    </div>
+
+                    <div class="container-fluid" id="post-container">
+
+                    </div>
+
             </div>
         </div>
     </div>
@@ -112,6 +115,40 @@
 
 <script> // It will execute when user click on edit button in model
     <%@ include file="js/profileJs.js"%> // This program is store in js file
+</script>
+
+<script>
+
+    function getAllPost(catId, reference) {
+        $("#loader").show();
+        $("#post-container").hide();
+        $(".c-link").removeClass('active') // Remove
+
+        fetch("load-post.jsp?jsCid=" + encodeURIComponent(catId))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("New");
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data)
+                $("#loader").hide();
+                $("#post-container").show();
+                $('#post-container').html(data)
+                $(reference).addClass('active')
+            })
+            .catch(error => {
+                console.log("Error", error);
+            })
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let allPost= $('.c-link')[0]
+        getAllPost(0, allPost)
+    })
+
+
 </script>
 
 </body>
