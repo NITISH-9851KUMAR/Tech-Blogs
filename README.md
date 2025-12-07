@@ -52,111 +52,78 @@ TechBlogs replaces static blogging methods with a dynamic, database-driven platf
 ➤ User Authentication
 
 User registration & login
-
 Secure session-based authentication
 
 ➤ Blog Management
-
 Add new blog with title, content, category, and image
-
 View all posts with image preview
-
 Read detailed blog content with formatted UI
 
 ➤ Interactive Elements
-
 Like button (count stored in DB)
-
 Comment section (optional)
-
 Category-wise blog filtering
 
 ➤ Responsive UI
-
 Built using Bootstrap 5
-
 Card-based layout for cleaner user experience
 
 🧩 System Modules
 1. User Registration Module
-
-Stores user details in MySQL
-
-Validates required fields
+  Stores user details in MySQL
+  Validates required fields
 
 2. Login Module
 
-Authenticates user credentials
-
-Maintains session for logged-in users
+  Authenticates user credentials
+  Maintains session for logged-in users
 
 3. Blog Operations Module
 
-Create blog
-
-View all blogs
-
-View detailed post
-
-Like posts
+  Create blog
+  View all blogs
+  View detailed post
+  Like posts
 
 4. Category Module
-
-Filter posts by category
-
-Sidebar category listing
+  Filter posts by category
+  Sidebar category listing
 
 🛠️ Technologies Used
-Category	Tools / Technologies
-Frontend	HTML, CSS, JavaScript, Bootstrap 5, JSP
-Backend	Java (JDK 24), JDBC, Servlets, javascript 
-Database	MySQL 8.0+
-Web Server	Apache Tomcat 9
-IDE	IntelliJ IDEA / Eclipse
-OS	Windows 10/11 or Ubuntu
-Browser	Chrome / Edge
-Version Control	Git + Git Bash
-Hosting (optional)	AWS EC2 or any Java-supported cloud
-Image Handling	File upload using Servlet & server directory
+    Category	Tools / Technologies
+    Frontend	HTML, CSS, JavaScript, Bootstrap 5, JSP
+    Backend	Java (JDK 24), JDBC, Servlets, javascript 
+    Database	MySQL 8.0+
+    Web Server	Apache Tomcat 9
+    IDE	IntelliJ IDEA / Eclipse
+    OS	Windows 10/11 or Ubuntu
+    Browser	Chrome / Edge
+    Version Control	Git + Git Bash
+    Hosting (optional)	AWS EC2 or any Java-supported cloud
+    Image Handling	File upload using Servlet & server directory
 
 ☁️ Application Architecture
-Client Side
-
-Web browser (Chrome/Edge)
-
-Sends HTTP requests to server
-
-Web Tier
-
-Apache Tomcat 9
-
-Handles JSP pages & Servlets
-
-Application Tier
-
-Java Servlets
-
-Business logic (register, login, add post, like, filter)
-
-JDBC for database communication
+  Client Side
+  Web browser (Chrome/Edge)
+  Sends HTTP requests to server
+  Web Tier
+  Apache Tomcat 9
+  Handles JSP pages & Servlets
+  Application Tier
+  Java Servlets
+  Business logic (register, login, add post, like, filter)
+  JDBC for database communication
 
 Database Tier
-
 MySQL database containing:
-
-users table
-
-posts table
-
-likes table
-
-categories table
-
-Security
-
-Session security for logged-in users
-
-Secure database operations using prepared statements
+  
+  users table
+  posts table
+  likes table
+  categories table
+  Security
+  Session security for logged-in users
+  Secure database operations using prepared statements
 
 
 
