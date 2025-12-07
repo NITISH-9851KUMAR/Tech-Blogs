@@ -36,7 +36,7 @@
                 </p>
             </div>
             <div class="card-footer bg-primary text-center">
-                <a href="post_details.jsp?post_id=<%=allPost.getpId()%>" class="btn btn-outline-light  btn-sm">Read More...</a>
+                <a href="post-details.jsp?post_id=<%=allPost.getpId()%>" class="btn btn-outline-light  btn-sm">Read More...</a>
                 <!-- Like Button -->
                 <a href="#" onclick="doLike(<%=allPost.getpId()%>, <%=user.getUserId()%>)"
                    class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span class="like-counter"> <%=LikeDao.countLikeOnPost(allPost.getpId())%></span></a>

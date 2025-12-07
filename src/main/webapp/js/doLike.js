@@ -17,11 +17,9 @@ function doLike(pid, uid) {
         .then(result => {
             console.log(result);
             if (result.trim() == 'true') {
-
                 let c = $(".like-counter").html();
                 c++;
                 $(".like-counter").html(c);
-
             }
         })
         .catch(err => console.error(err));

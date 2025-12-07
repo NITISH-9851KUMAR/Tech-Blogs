@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
 import java.io.File;
 
 @MultipartConfig
-@WebServlet("/signup-servlet")
-public class Register_Servlet extends HttpServlet{
+@WebServlet("/register-servlet")
+public class RegisterServlet extends HttpServlet{
 
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -48,8 +48,7 @@ public class Register_Servlet extends HttpServlet{
         User user= new User(uName, email, gender, password, dateNow , photoName);
 
         // call UserDao for save data into database;
-        UserDao userDao= new UserDao();
-        if (userDao.saveUserData(user)) {
+        if (UserDao.saveUserData(user)) {
             response.setStatus(HttpServletResponse.SC_OK);
             out.println("Successfully Register"); // Set the Message
 
@@ -57,7 +56,7 @@ public class Register_Servlet extends HttpServlet{
             HttpSession session= request.getSession();
             session.setAttribute("email", email);
             session.setAttribute("pass", password);
-        } else {
+        } else { //UserDao.saveUserData(user) If it will not execute then else block executes
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             out.println("Email already exists"); // Set the Message
         }

@@ -4,10 +4,10 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" userId="navbarSupportedContent">
+    <div class="collapse navbar-collapse" Id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#"> <span class="fa fa-star"></span> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.jsp"> <span class="fa fa-star"></span> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> <span class="fa fa-universal-access"></span> Link</a>
@@ -17,9 +17,11 @@
                     <span class="fa fa-bomb"></span>   Categories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">C Programming</a>
                     <a class="dropdown-item" href="#">Java Programming</a>
                     <a class="dropdown-item" href="#">Python Programming</a>
+                    <a class="dropdown-item" href="#">Web Programming</a>
+                    <a class="dropdown-item" href="#">Database Programming</a>
+                    <a class="dropdown-item" href="#">Data Science</a>
 
                 </div>
             </li>

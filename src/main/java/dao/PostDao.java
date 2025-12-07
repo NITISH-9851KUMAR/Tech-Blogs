@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 public class PostDao {
 
+    static Connection connection= null;
     // Save User Post to the Database
     public static boolean savePost(Post post) {
         boolean flag = false;
+        connection = helper.ConnectionProvider.getConnection();
 
-        Connection connection = helper.ConnectionProvider.getConnection();
         try {
 
             String sql = "INSERT INTO posts(pTitle, pContent, pCode, pPic, catId, userId) VALUES(?, ?, ?, ?, ?, ?)";
@@ -42,7 +43,7 @@ public class PostDao {
         ArrayList<Post> list= new ArrayList<>();
 
         try{
-            Connection connection= helper.ConnectionProvider.getConnection();
+            connection= helper.ConnectionProvider.getConnection();
             String sql= "SELECT * FROM posts WHERE userId= ? ORDER BY pid DESC";
             PreparedStatement pstm= connection.prepareStatement(sql);
             pstm.setInt(1, id);
@@ -74,7 +75,7 @@ public class PostDao {
         ArrayList<Post> list= new ArrayList<>();
 
         try{
-            Connection connection= helper.ConnectionProvider.getConnection();
+            connection= helper.ConnectionProvider.getConnection();
             String sql= "SELECT * FROM posts WHERE catId=? AND userId= ? ";
             PreparedStatement pstm= connection.prepareStatement(sql);
             pstm.setInt(1, cId);
@@ -103,12 +104,11 @@ public class PostDao {
     }
 
     // Get all Post Details by postId
-
     public static Post allPostByPostId(int post_Id){
         Post post= null;
 
         try{
-            Connection connection= helper.ConnectionProvider.getConnection();
+            connection= helper.ConnectionProvider.getConnection();
             String sql= "SELECT * FROM posts WHERE pid=?";
             PreparedStatement pstm= connection.prepareStatement(sql);
             pstm.setInt(1, post_Id);
@@ -133,4 +133,5 @@ public class PostDao {
 
         return post;
     }
+
 }

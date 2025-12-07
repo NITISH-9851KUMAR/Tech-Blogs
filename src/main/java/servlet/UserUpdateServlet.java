@@ -8,21 +8,16 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import javax.servlet.http.Part;
 
-@WebServlet("/edit-servlet")
+@WebServlet("/update-user")
 @MultipartConfig
-public class UpdateUserServlet extends HttpServlet{
+public class UserUpdateServlet extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-
-        PrintWriter out= response.getWriter();
         response.setContentType("text/html");
-
         // Fetch User data
         int userId= Integer.parseInt(request.getParameter("u_id"));
         String name= request.getParameter("u_name").trim();
@@ -32,7 +27,7 @@ public class UpdateUserServlet extends HttpServlet{
 
         // Take the profile pic details
         Part photoPart= request.getPart("u_pic");
-        String imageName = photoPart.getSubmittedFileName();
+        String newPicName = photoPart.getSubmittedFileName();
 
         // get the current user details
         HttpSession session= request.getSession();
@@ -46,20 +41,19 @@ public class UpdateUserServlet extends HttpServlet{
         user.setEmail(email);
         user.setGender(gender);
         user.setPassword(password);
-        user.setImage(imageName);
+        user.setImage(newPicName);
 
-        boolean flag= new UserDao().updateUserDetails(user);
+        boolean flag= UserDao.updateUserDetails(user);
         if(flag){
-            Message msg= new Message("Update Value Successfully");
-
+            Message msg= new Message("Update User Details Successfully");
             // It gives the path of our image
             String path= request.getServletContext().getRealPath("/img")+File.separator+user.getImage();
             String odlPicPath = request.getServletContext().getRealPath("/img")+File.separator+oldPicName;
-            UpdatePhoto.deleteFile(odlPicPath); // delete file
+            deleteOldPic(odlPicPath); // delete oldPic
 
             // call the saveFile for update photo
-            if(UpdatePhoto.saveFile(photoPart.getInputStream(), path)){
-                msg= new Message("Update Value Successfully");
+            if(saveNewPic(photoPart.getInputStream(), path)){
+                msg= new Message("Update User Details Successfully");
             }
             session.setAttribute("message", msg);
             response.sendRedirect("profile.jsp");
@@ -69,6 +63,40 @@ public class UpdateUserServlet extends HttpServlet{
             response.sendRedirect("profile.jsp");
         }
 
-
     }
+
+    // Save New Pic Into LocalFolder
+    public static boolean saveNewPic(InputStream inputStream, String path){
+        boolean flag= false;
+        try{
+
+            byte[] bytes = new byte[inputStream.available()];
+            inputStream.read(bytes);
+
+            FileOutputStream fos= new FileOutputStream(path);
+            fos.write(bytes);
+            fos.flush();
+            fos.close();
+            flag= true;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
+
+    // Delete Old Pic from LocalFolder
+    public static boolean deleteOldPic(String path) {
+        boolean flag= false;
+        try{
+            File file= new File(path);
+            flag= file.delete();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
 }

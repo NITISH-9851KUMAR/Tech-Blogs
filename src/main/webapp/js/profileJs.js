@@ -1,19 +1,18 @@
 // It used in profile.jsp page
 document.addEventListener("DOMContentLoaded", () => {
     let editStatus = false;
-    $('#edit-profile-button').click(function () {
+    $('#update-profile-button').click(function () {
         if (editStatus == false) {
             $("#profile-details").hide();
-            $("#profile-edit").show();
+            $("#profile-update").show();
             editStatus = true;
             $(this).text("Back");
         } else {
             $("#profile-details").show();
-            $("#profile-edit").hide();
+            $("#profile-update").hide();
             editStatus = false;
             $(this).text("Edit");
         }
 
     });
-
 });

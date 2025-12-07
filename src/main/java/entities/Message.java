@@ -1,7 +1,6 @@
 package entities;
 
 public class Message {
-
     String message;
 
     public Message(String message) {

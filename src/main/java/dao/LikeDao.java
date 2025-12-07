@@ -1,9 +1,6 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+import java.sql.*;
 
 public class LikeDao {
 
@@ -44,40 +41,41 @@ public class LikeDao {
         return count;
     }
 
-    // Checked is Already Liked By user
-    public static boolean isLikedByUser(int pid, int uid) {
-        boolean flag = false;
-        try {
-            connection = helper.ConnectionProvider.getConnection();
-            String query = "SELECT * FROM likes WHERE pid= ? and uid= ?";
-            PreparedStatement pstm = connection.prepareStatement(query);
-            pstm.setInt(1, pid);
-            pstm.setInt(2, uid);
-            ResultSet rSet = pstm.executeQuery();
-            if (rSet.next()) {
-                flag = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
+//    // Checked is Already Liked By user
+//    public static boolean isLikedByUser(int pid, int uid) {
+//        boolean flag = false;
+//        try {
+//            connection = helper.ConnectionProvider.getConnection();
+//            String query = "SELECT * FROM likes WHERE pid= ? and uid= ?";
+//            PreparedStatement pstm = connection.prepareStatement(query);
+//            pstm.setInt(1, pid);
+//            pstm.setInt(2, uid);
+//            ResultSet rSet = pstm.executeQuery();
+//            if (rSet.next()) {
+//                flag = true;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return flag;
+//    }
+//
+//    // Delete Like
+//    public static boolean disLiked(int pid, int uid) {
+//        boolean flag = false;
+//        try {
+//            connection = helper.ConnectionProvider.getConnection();
+//            String query = "DELETE * FROM likes WHERE pid= ? and uid= ?";
+//            PreparedStatement pstm = connection.prepareStatement(query);
+//            pstm.setInt(1, pid);
+//            pstm.setInt(2, uid);
+//            pstm.executeUpdate();
+//            flag = true;
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return flag;
+//    }
 
-    // Delete Like
-    public static boolean disLiked(int pid, int uid) {
-        boolean flag = false;
-        try {
-            connection = helper.ConnectionProvider.getConnection();
-            String query = "DELETE * FROM likes WHERE pid= ? and uid= ?";
-            PreparedStatement pstm = connection.prepareStatement(query);
-            pstm.setInt(1, pid);
-            pstm.setInt(2, uid);
-            pstm.executeUpdate();
-            flag = true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
 }

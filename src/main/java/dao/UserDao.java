@@ -7,13 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class UserDao {
-
-    private Connection connection= ConnectionProvider.getConnection();
+    private static Connection connection = null;
 
     // Save User Details into Database
-    public boolean saveUserData(User user) {
+    public static boolean saveUserData(User user) {
         boolean flag = false;
         try {
+            connection = ConnectionProvider.getConnection();
             String query = "INSERT INTO USER_Details(user_name, email, gender, password, reg_date, pic) VALUES(?, ?, ?, ?, ?, ?)";
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setString(1, user.getUser_name());
@@ -29,11 +29,10 @@ public class UserDao {
             e.printStackTrace();
         }
         return flag;
-
     }
 
     // Update User Details
-    public boolean updateUserDetails(User user) {
+    public static boolean updateUserDetails(User user) {
         boolean flag = false;
         try {
             connection = ConnectionProvider.getConnection();
@@ -53,4 +52,5 @@ public class UserDao {
         }
         return flag;
     }
+
 }

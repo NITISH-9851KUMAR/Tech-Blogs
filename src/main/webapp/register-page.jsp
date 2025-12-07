@@ -16,18 +16,14 @@
 <main class="primary-background p-3">
     <div class="container">
         <div class="col-md-5 offset-md-4">
-
             <div class="card">
-
                 <div class="card-header text-center">
                     <span class="fa fa-user-plus fa-3x"></span> <br>
                     Register here
                 </div>
 
                 <div class="card-body">
-
-                    <form Id="form-part" method="post" action="signup-servlet" enctype="multipart/form-data">
-
+                    <form Id="form-part" method="post" action="register-servlet" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="user_name">User Name</label>
                             <input type="text" placeholder="Enter User Name" name="user_name"
@@ -62,26 +58,20 @@
                             <button type="submit" class="btn btn-primary text-center">Register</button>
                             <button type="reset" class="btn btn-danger ml-2">Reset</button>
                         </div>
-
                     </form>
                 </div>
-
             </div>
-
         </div>
-    </div>
+    </div> <!-- Container Div -->
 </main>
 
-<!-- SweetAlert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
+<script> // This script File used to without going on register-servlet page, send user data to the servlet
     document.getElementById("form-part").addEventListener("submit", function (e) {
         e.preventDefault(); 
 
         let form = new FormData(this);
 
-        fetch("signup-servlet", {
+        fetch("register-servlet", {
             method: "POST",
             body: form
         })

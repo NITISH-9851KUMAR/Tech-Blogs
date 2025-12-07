@@ -23,7 +23,6 @@
                     <a class="dropdown-item" href="#">C Programming</a>
                     <a class="dropdown-item" href="#">Java Programming</a>
                     <a class="dropdown-item" href="#">Python Programming</a>
-
                 </div>
             </li>
             <li class="nav-item">
@@ -46,14 +45,11 @@
                    data-target="#profile-model"><span class="fa fa-user"></span> <%=name%>
                 </a>
             </li>
-
             <li class="nav-item ml-3">
                 <a href="logout-servlet" class="btn text-white form-control my-2 my-sm-0">
                 <span class="fa fa-sign-out"></span> Logout</a>
             </li>
-
         </ul>
-
     </div>
 </nav>
 

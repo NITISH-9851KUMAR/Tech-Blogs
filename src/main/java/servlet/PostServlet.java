@@ -12,9 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/doPostServlet")
+@WebServlet("/save-post")
 @MultipartConfig
-public class DoPostServlet extends HttpServlet {
+public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

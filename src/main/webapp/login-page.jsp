@@ -17,17 +17,18 @@
 <%--include navbar--%>
 <%@include file="navbar.jsp" %>
 <%
+    // It will execute when New user Register, email and password will show in login input filed
+    // In First Time it will not shows
     String user_email = (String) session.getAttribute("email");
     String user_pass = (String) session.getAttribute("pass");
 %>
 
 <main class="d-flex align-items-center primary-background" style="height: 100vh">
     <div class="container">
+
         <div class="row">
             <div class="col-md-4 offset-md-4">
-
                 <div class="card">
-
                     <div class="card-header text-center">
                         <span class="fa fa-user-circle-o fa-3x"></span>
                         <h3>Login here</h3>
@@ -47,7 +48,7 @@
                     %>
 
                     <div class="card-body">
-                        <form method="post" action="login">
+                        <form action="login-servlet" method="post" >
                             <div class="form-group">
                                 <label for="exampleInputUserName">Email Address</label>
                                 <input name="email" placeholder="Enter Email Address" type="email" required
@@ -61,7 +62,7 @@
                                        class="form-control" Id="exampleInputPassword1">
                             </div>
 
-                            <!-- If user refresh site -->
+                            <!-- If user refresh site then it will be removed -->
                             <%
                                 session.removeAttribute("email");
                                 session.removeAttribute("pass");
@@ -70,14 +71,13 @@
                             <div class="container text-center">
                                 <button type="submit" class="btn btn-primary align-items-center">Login</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+
+    </div><!-- Container Div -->
 </main>
 
 </body>

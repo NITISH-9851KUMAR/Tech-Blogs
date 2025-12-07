@@ -2,12 +2,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entities.Category" %>
 
-
-<!-- It is Navbar of profile.jsp File -->
 <%@include file="profile-navbar.jsp"%>
-<!-- Terminated Navbar of profile.jsp File -->
+<%@include file="all_css_js.jsp"%>
 
-<!-- Profile-View Model Start-->
+<!-- Profile View and Update Model-->
 <div class="modal fade" Id="profile-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -25,13 +23,11 @@
 
                     <h5><%= user.getUser_name()%>
                     </h5>
-
-                    <!-- Table under the div -->
-                    <div userId="profile-details"> <!-- It will execute when we click on userName in profile page -->
+                    <!-- Profile Details -->
+                    <div id="profile-details"> <!-- It will execute when we click on userName in profile page -->
                         <table class="table">
                             <tbody>
                             <tr>
-
                                 <th scope="row">ID</th>
                                 <td><%= user.getUserId()%>
                                 </td>
@@ -51,22 +47,19 @@
                                 <td><%=user.getGender().toUpperCase()%>
                                 </td>
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- Profile Edit Div -->
-                    <div    Id="profile-edit" style="display: none">
+                    <!-- Profile Update -->
+                    <div id="profile-update" style="display: none">
                         <h4 class="mt-2 " style="color: red;">Please Edit Carefully</h4>
                         <!-- Edit table Details -->
-                        <form action="edit-servlet" method="post" enctype="multipart/form-data">
+                        <form action="update-user" method="post" enctype="multipart/form-data">
                             <!-- Write Code from There Now we will edit -->
                             <!-- enctype tells the form it contains multi type data like text, email, password, image -->
                             <input type="hidden" name="u_id" value="<%=user.getUserId()%>">
-
                             <table class="table">
-
                                 <th scope="row">ID</th>
                                 <td><%= user.getUserId() %>
                                 </td>
@@ -120,15 +113,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button Id="edit-profile-button" type="button" class="btn btn-primary">Edit Profile</button>
+                <button id="update-profile-button" type="button" class="btn btn-primary">Edit Profile</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Profile-View Model End -->
-
-<!-- Do Post Modal Code Starts -->
+<!-- Add Post Modal-->
 <div class="modal fade" Id="add-post" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -140,7 +131,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form Id="add-post-form" action="doPostServlet" method="post" enctype="multipart/form-data"> <!-- do post form -->
+            <form id="add-post-form" action="save-post" method="post" enctype="multipart/form-data">
+                <!-- do post form -->
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -167,12 +159,12 @@
                     <div class="form-group">
                         <label for="post-content">Post Content</label>
                         <textarea name="postContent" class="form-control" Id="post-content"
-                               required placeholder="Enter Post Content"></textarea>
+                                  required placeholder="Enter Post Content"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="post-code">Post Code</label>
                         <textarea name="postCode" class="form-control" Id="post-code"
-                                required placeholder="Enter Post Code( if any )"></textarea>
+                                  required placeholder="Enter Post Code( if any )"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="post-pic">Post Pic</label>
@@ -189,11 +181,10 @@
     </div>
 </div>
 
-<%-- Do Post Modal End--%>
+<script src="js/profileJs.js"></script>
 
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 <script> <!-- Javascript file for add Post -->
 document.getElementById("add-post-form").addEventListener("submit", function (e) {
@@ -201,7 +192,7 @@ document.getElementById("add-post-form").addEventListener("submit", function (e)
 
     let form = new FormData(this); // It collects all form data
 
-    fetch("doPostServlet", { // fetch method send data to the servlet url like "doPostServlet"
+    fetch("save-post", { // fetch method send data to the servlet url like "doPostServlet"
         method: "POST",
         body: form // It sends all form data to the doPostServlet
     })
@@ -221,9 +212,6 @@ document.getElementById("add-post-form").addEventListener("submit", function (e)
                 text: data,
                 icon: "success"
             })
-            //     .then(() => {
-            //     window.location.href = "login-page.jsp"; // Redirect to login page
-            // });
         })
         .catch(error => {
             // ERROR SweetAlert

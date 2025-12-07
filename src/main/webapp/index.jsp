@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*" %>
 <html>
 <head>
     <title>Home Page</title>
@@ -20,12 +19,11 @@
 </head>
 
 <body>
-
-<%--Navbar--%>
+<%--Include Navbar into Index.jsp Page--%>
 <%@include file="navbar.jsp" %>
 
-<%--Banner--%>
 
+<%-- Banner of Index.jsp Page It shows After Navbar--%>
 <div class="container-fluid p-0 m-0 banner">
     <div class="jumbotron">
         <div class="container">
@@ -42,10 +40,9 @@
     </div>
 </div>
 
+
 <%--card--%>
-
 <div class="container">
-
     <div class="row mb-4"> <!-- First Row -->
 
         <div class="col-md-4">
@@ -83,7 +80,6 @@
     </div>
 
     <div class="row"> <!-- Second Row -->
-
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
@@ -118,9 +114,9 @@
         </div>
     </div>
 
-</div>
+</div> <!-- Terminated Container div -->
 
-<%--  java script--%>
 </body>
+
 
 </html>
