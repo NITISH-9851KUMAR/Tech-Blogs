@@ -7,7 +7,6 @@ Built with JSP, Servlets, JDBC, MySQL, Bootstrap, and Tomcat.
 
 ##Home Page
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Home_Page.png)
-src/main/webapp/Project-Image/Home_Page.png
 
 ##Loin Page
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Login_Page.png)
@@ -19,7 +18,7 @@ src/main/webapp/Project-Image/Home_Page.png
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Profile_Page.png)
 
 ##Blogger Details Page
-![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Blogger_Details/.png)
+![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Blogger_Details/.png)
 
 ##Blogger Update 
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Update_Blogger_Details.png)
