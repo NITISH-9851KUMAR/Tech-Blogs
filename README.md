@@ -30,6 +30,10 @@ src/main/webapp/Project-Image/Home_Page.png
 ##Post Details
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Post_Details.png)
 
+##Logout Modules
+![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Logout_Module.png)
+
+
 
 
 
