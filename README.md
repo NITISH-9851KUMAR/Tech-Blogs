@@ -11,3 +11,6 @@ Home Page
 ## 📄 Blogger Details Page
 ![Blogger Details](src/main/webapp/Project-Image/blogger-details.png)
 
+![Blogger Details](https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/src/main/webapp/Project-Image/blogger-details.png)
+
+
