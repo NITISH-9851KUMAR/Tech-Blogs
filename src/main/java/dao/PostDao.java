@@ -2,11 +2,9 @@ package dao;
 
 import entities.Post;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class PostDao {
@@ -132,6 +130,38 @@ public class PostDao {
         }
 
         return post;
+    }
+
+    // Get all post without any id , it shows on index page
+    public static ArrayList<Post> allPost(){
+        ArrayList<Post> list= new ArrayList<>();
+
+        try{
+            connection= helper.ConnectionProvider.getConnection();
+            String sql= "SELECT * FROM posts ORDER BY pid DESC LIMIT 6";
+            PreparedStatement pstm= connection.prepareStatement(sql);
+
+
+            ResultSet rSet= pstm.executeQuery();
+            while (rSet.next()) {
+                int pId= rSet.getInt("pId");
+                String pTitle= rSet.getString("pTitle");
+                String pContent= rSet.getString("pContent");
+                String pCode= rSet.getString("pCode");
+                String pPic= rSet.getString("pPic");
+                String pDate= rSet.getString("pDate");
+                int catId= rSet.getInt("catId");
+                int userId= rSet.getInt("userId");
+
+                Post p= new Post(pId, pTitle, pContent, pCode, pPic, pDate, catId, userId);
+                list.add(p);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }

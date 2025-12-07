@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class loginDao {
+public class LoginDao {
 
     private Connection connection = null;
     User user = null;

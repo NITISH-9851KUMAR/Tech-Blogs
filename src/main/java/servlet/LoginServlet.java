@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         String UPassword= request.getParameter("password");
 
         // call the login Dao
-        User user= new loginDao().getUserByUserNameAndPassword(uName, UPassword);
+        User user= new LoginDao().getUserByUserNameAndPassword(uName, UPassword);
 
         if(user==null){
             // login error, could be wrong email or password

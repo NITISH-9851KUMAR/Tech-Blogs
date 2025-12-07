@@ -1,4 +1,7 @@
-<%--
+<%@ page import="entities.Post" %>
+<%@ page import="dao.PostDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.LikeDao" %><%--
   Created by IntelliJ IDEA.
   User: Nitis Kumar
   Date: 09-10-2025
@@ -40,83 +43,114 @@
     </div>
 </div>
 
+<%--show all post--%>
+<div class="container mt-4">
+    <div class="row g-4">
 
-<%--card--%>
-<div class="container">
-    <div class="row mb-4"> <!-- First Row -->
+        <%
+            List<Post> post = PostDao.allPost();
+            if (post.size() == 0) {
+        %>
+        <h5 class="text-center text-muted">No Posts Are Available in This Category</h5>
+        <%
+                return;
+            }
 
-        <div class="col-md-4">
-            <div class="card">
+            for (Post allPost : post) {
+        %>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 rounded-3 post-card" style="overflow: hidden;">
+
+                <img class="card-img-top"
+                     src="img/<%=allPost.getpPic()%>"
+                     alt="Post Image"
+                     style="height: 200px; object-fit: cover;">
+
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Starts Here</a>
+                    <h5 class="card-title fw-bold">
+                        <%= allPost.getpTitle() %>
+                    </h5>
+
+                    <p class="card-text text-muted" style="max-height: 90px; overflow: hidden;">
+                        <%= allPost.getpContent() %>
+                    </p>
+                </div>
+
+                <div class="card-footer bg-white text-center d-flex justify-content-around py-3">
+
+                    <!-- Read More -->
+                    <a href="post-details.jsp?post_id=<%=allPost.getpId()%>"
+                       class="btn btn-sm btn-outline-primary">
+                        Read More
+                    </a>
+
+                    <!-- Like Button -->
+                    <a href="#" class="btn btn-sm btn-outline-success">
+                        <i class="fa fa-thumbs-o-up"></i>
+                        <span class="like-counter">
+                            <%= LikeDao.countLikeOnPost(allPost.getpId()) %>
+                        </span>
+                    </a>
+
+                    <!-- Comments -->
+                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                        <i class="fa fa-commenting-o"></i>
+                        <span>20</span>
+                    </a>
+
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Starts Here</a>
-                </div>
-            </div>
-        </div>
+        <%
+            }
+        %>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Starts Here</a>
-                </div>
-            </div>
-        </div>
     </div>
+</div>
 
-    <div class="row"> <!-- Second Row -->
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Starts Here</a>
-                </div>
-            </div>
-        </div>
+<%--<div class="container">--%>
+<%--    <div class="row">--%>
+<%--        <%--%>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Starts Here</a>
-                </div>
-            </div>
-        </div>
+<%--            List<Post> post = PostDao.allPost();--%>
+<%--            if (post.size() == 0) {--%>
+<%--        %>--%>
+<%--        <h5 class="text-center">No Post Are Available in this Category</h5>--%>
+<%--        <%--%>
+<%--                return;--%>
+<%--            }--%>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Starts Here</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div> <!-- Terminated Container div -->
+<%--            for (Post allPost : post) {--%>
+<%--        %>--%>
+<%--        <div class="col-md-6 mt-2">--%>
+<%--            <div class="card">--%>
+<%--                <img class="card-img-top" src="img/<%=allPost.getpPic()%>" alt="">--%>
+<%--                <div class="card-body">--%>
+<%--                    <b><%=allPost.getpTitle()%>--%>
+<%--                    </b>--%>
+<%--                    <p><%=allPost.getpContent()%>--%>
+<%--                    </p>--%>
+<%--            </div>--%>
+<%--                <div class="card-footer bg-primary text-center">--%>
+<%--                    <a href="post-details.jsp?post_id=<%=allPost.getpId()%>" class="btn btn-outline-light  btn-sm">Read--%>
+<%--                        More...</a>--%>
+<%--                    <!-- Like Button -->--%>
+<%--                    <a href="#"--%>
+<%--                       class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span--%>
+<%--                            class="like-counter"> <%=LikeDao.countLikeOnPost(allPost.getpId())%></span></a>--%>
+<%--                    <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span> 20</span></a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <%--%>
+<%--            }--%>
+<%--        %>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<!-- Show all Post -->
 
 </body>
-
-
 </html>
+
