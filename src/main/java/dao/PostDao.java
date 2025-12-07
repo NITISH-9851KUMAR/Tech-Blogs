@@ -132,7 +132,7 @@ public class PostDao {
         return post;
     }
 
-    // Get all post without any id , it shows on index page
+    // Get first 6 post to shows on index page
     public static ArrayList<Post> allPost(){
         ArrayList<Post> list= new ArrayList<>();
 
