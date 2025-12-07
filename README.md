@@ -8,10 +8,8 @@ Built with JSP, Servlets, JDBC, MySQL, Bootstrap, and Tomcat.
 Home Page
 <img width="1352" height="767" alt="Home Page" src="https://github.com/user-attachments/assets/fdabe7f7-b13f-439b-9f3a-f17dba14592e" />
 
-## 📄 Blogger Details Page
-![Blogger Details](src/main/webapp/Project-Image/blogger-details.png)
+![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Login%20Page.png)
 
-![image](https://github.com/username/repo/assets/.../image.png)
 
 
 
