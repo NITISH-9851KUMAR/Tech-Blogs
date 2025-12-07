@@ -6,12 +6,14 @@ Built with JSP, Servlets, JDBC, MySQL, Bootstrap, and Tomcat.
 📸 Project Images
 
 ##Home Page
-<img width="1352" height="767" alt="Home Page" src="https://github.com/user-attachments/assets/fdabe7f7-b13f-439b-9f3a-f17dba14592e" />
+![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Login_Page.png)
+src/main/webapp/Project-Image/Home_Page.png
 
 ##Loin Page
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Login_Page.png)
 
 ##Register Page
+![Home Page](src/main/webapp/Project-Image/home_page.png)
 
 ##Profile Page
 
