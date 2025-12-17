@@ -32,7 +32,6 @@ Built with JSP, Servlets, JDBC, MySQL, Bootstrap, and Tomcat.
 ## Logout Modules
 ![image](https://github.com/NITISH-9851KUMAR/Tech-Blogs/blob/main/src/main/webapp/Project-Image/Logout_Module.png)
 
-.
 
 📘 Abstract
 
@@ -49,24 +48,24 @@ TechBlogs replaces static blogging methods with a dynamic, database-driven platf
 ✔ Simplify content management for creators
 
 🔑 Key Features
-➤ User Authentication
 
-User registration & login
-Secure session-based authentication
+➤ User Authentication
+  User registration & login
+  Secure session-based authentication
 
 ➤ Blog Management
-Add new blog with title, content, category, and image
-View all posts with image preview
-Read detailed blog content with formatted UI
+  Add new blog with title, content, category, and image
+  View all posts with image preview
+  Read detailed blog content with formatted UI
 
 ➤ Interactive Elements
-Like button (count stored in DB)
-Comment section (optional)
-Category-wise blog filtering
+  Like button (count stored in DB)
+  Comment section (optional)
+  Category-wise blog filtering
 
 ➤ Responsive UI
-Built using Bootstrap 5
-Card-based layout for cleaner user experience
+  Built using Bootstrap 5
+  Card-based layout for cleaner user experience
 
 🧩 System Modules
 1. User Registration Module
@@ -115,8 +114,8 @@ Card-based layout for cleaner user experience
   JDBC for database communication
 
 Database Tier
+
 MySQL database containing:
-  
   users table
   posts table
   likes table
@@ -125,18 +124,18 @@ MySQL database containing:
   Session security for logged-in users
   Secure database operations using prepared statements
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 🛠️ Technologies Used
+-------------------------------------------------------------------
+| Category           | Tools / Languages                          |
+|--------------------|--------------------------------------------|
+| Frontend           | HTML, CSS, JavaScript, JSP                 |
+| Backend            | Java (JDK 24), JDBC, Servlets              |
+| Database           | Oracle 11g XE / MySQL 8.0+                 |
+| Web Server         | Apache Tomcat 9                            |
+| IDE                | IntelliJ IDEA / Eclipse                    |
+| Operating System   | Windows 10/11, Ubuntu 20.04+               |
+| Browser            | Chrome, Edge                               |
+| Cloud Hosting      | AWS EC2 (Ubuntu 20.04 LTS)                 |
+| Version Control    | Git (Git Bash)                             |
+| File Transfer      | FileZilla                                  |
+-------------------------------------------------------------------
