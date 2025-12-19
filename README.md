@@ -134,7 +134,7 @@ MySQL database containing:
 | Web Server         | Apache Tomcat 9                            |
 | IDE                | IntelliJ IDEA / Eclipse                    |
 | Operating System   | Windows 10/11, Ubuntu 20.04+               |
-| Browser            | Chrome, Edge                               |
+| Browser            | Chrome, Ulaa                               |
 | Cloud Hosting      | AWS EC2 (Ubuntu 20.04 LTS)                 |
 | Version Control    | Git (Git Bash)                             |
 | File Transfer      | FileZilla                                  |
